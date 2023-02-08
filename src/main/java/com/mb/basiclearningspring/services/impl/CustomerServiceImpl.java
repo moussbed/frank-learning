@@ -1,20 +1,15 @@
 package com.mb.basiclearningspring.services.impl;
 
-import com.mb.basiclearningspring.exceptions.NotFoundException;
-import com.mb.basiclearningspring.repositories.CustomerRepository;
-import com.mb.basiclearningspring.dto.mappers.CustomerMapper;
 import com.mb.basiclearningspring.dto.CustomerRequest;
 import com.mb.basiclearningspring.dto.CustomerResponse;
+import com.mb.basiclearningspring.dto.mappers.CustomerMapper;
 import com.mb.basiclearningspring.entities.Customer;
+import com.mb.basiclearningspring.exceptions.NotFoundException;
+import com.mb.basiclearningspring.repositories.CustomerRepository;
 import com.mb.basiclearningspring.services.CustomerService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.ErrorResponse;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -27,6 +22,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<CustomerResponse> getCustomers() {
+        // TODO CALL EXTERNAL API TO RETRIEVE CUSTOMERS
         return customerRepository.findAll()
                 .stream()
                 .map(CustomerMapper.MAPPER::customerToCustomerResponse)
