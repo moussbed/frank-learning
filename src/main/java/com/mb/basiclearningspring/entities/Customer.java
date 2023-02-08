@@ -1,4 +1,4 @@
-package com.mb.basiclearningspring;
+package com.mb.basiclearningspring.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;

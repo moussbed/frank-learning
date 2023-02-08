@@ -1,5 +1,6 @@
-package com.mb.basiclearningspring;
+package com.mb.basiclearningspring.repositories;
 
+import com.mb.basiclearningspring.entities.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 

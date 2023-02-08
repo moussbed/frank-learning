@@ -1,4 +1,4 @@
-package com.mb.basiclearningspring;
+package com.mb.basiclearningspring.dto;
 
 public record CustomerRequest(String firstName, String lastName) {
 

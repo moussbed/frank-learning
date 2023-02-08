@@ -1,12 +1,23 @@
-package com.mb.basiclearningspring;
+package com.mb.basiclearningspring.services.impl;
 
-import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
+import com.mb.basiclearningspring.exceptions.NotFoundException;
+import com.mb.basiclearningspring.repositories.CustomerRepository;
+import com.mb.basiclearningspring.dto.mappers.CustomerMapper;
+import com.mb.basiclearningspring.dto.CustomerRequest;
+import com.mb.basiclearningspring.dto.CustomerResponse;
+import com.mb.basiclearningspring.entities.Customer;
+import com.mb.basiclearningspring.services.CustomerService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.ErrorResponse;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class CustomerServiceImpl implements CustomerService{
+public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepository customerRepository;
 
@@ -29,13 +40,13 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
-    public CustomerResponse getCustomer(Long id) throws NotFoundException {
+    public CustomerResponse getCustomer(Long id) {
         Customer customer = getCustomerById(id);
         return CustomerMapper.MAPPER.customerToCustomerResponse(customer);
     }
 
     @Override
-    public CustomerResponse modifyCustomer(Long id, CustomerRequest customerRequest) throws NotFoundException {
+    public CustomerResponse modifyCustomer(Long id, CustomerRequest customerRequest){
         Customer customer = getCustomerById(id);
         customer.setFirstName(customerRequest.firstName());
         customer.setLastName(customerRequest.lastName());
@@ -44,8 +55,8 @@ public class CustomerServiceImpl implements CustomerService{
         return CustomerMapper.MAPPER.customerToCustomerResponse(customer);
     }
 
-    private Customer getCustomerById(Long id) throws NotFoundException {
-        return customerRepository.findById(id).orElseThrow(NotFoundException::new);
+    private Customer getCustomerById(Long id)  {
+        return customerRepository.findById(id).orElseThrow(()->new NotFoundException(String.format("Customer %s not found ",id)));
     }
 
 }

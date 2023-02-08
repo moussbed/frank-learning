@@ -1,7 +1,9 @@
-package com.mb.basiclearningspring;
+package com.mb.basiclearningspring.controllers;
 
+import com.mb.basiclearningspring.dto.CustomerRequest;
+import com.mb.basiclearningspring.dto.CustomerResponse;
+import com.mb.basiclearningspring.services.CustomerService;
 import jakarta.validation.Valid;
-import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,12 +31,12 @@ public class CustomerController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
-    public CustomerResponse getCustomer(@PathVariable("id") Long id) throws NotFoundException {
+    public CustomerResponse getCustomer(@PathVariable("id") Long id)  {
         return customerService.getCustomer(id);
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
-    public CustomerResponse modifyCustomer(@PathVariable("id") Long id, @RequestBody CustomerRequest customer) throws NotFoundException {
+    public CustomerResponse modifyCustomer(@PathVariable("id") Long id, @RequestBody CustomerRequest customer) {
         return customerService.modifyCustomer(id,customer);
     }
 
