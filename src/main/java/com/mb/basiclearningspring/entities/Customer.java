@@ -8,7 +8,11 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.time.LocalDateTime;
 
 @Entity
-public class Customer extends ID implements BasicEntity {
+public class Customer implements BasicEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Long id;
 
     private String firstName;
     private String lastName;
@@ -21,6 +25,16 @@ public class Customer extends ID implements BasicEntity {
     private LocalDateTime modifiedDate;
 
     private Status status = Status.CREATED;
+
+    private String email;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Customer() {
     }
@@ -48,6 +62,13 @@ public class Customer extends ID implements BasicEntity {
         this.lastName = lastName;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     @Override
     public Status getStatus() {
