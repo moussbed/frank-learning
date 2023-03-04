@@ -14,6 +14,7 @@ public interface CustomerMapper {
 
     @Mapping(source = "customer.createdDate", target = "createdAt")
     @Mapping(source = "customer.modifiedDate", target = "modifiedAt")
+    @Mapping(source = "customer.account.id", target = "accountId")
     CustomerResponse customerToCustomerResponse(Customer customer);
 
     Customer customerRequestToCustomer(CustomerRequest request);

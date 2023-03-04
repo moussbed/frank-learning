@@ -12,6 +12,7 @@ import static  org.assertj.core.api.Assertions.assertThat;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @JsonTest
 public class CustomerRequestTest {
@@ -24,16 +25,16 @@ public class CustomerRequestTest {
     void shouldSerializeObject() throws IOException {
         final LocalDateTime now = LocalDateTime.now();
         CustomerResponse customerResponse = new CustomerResponse(
-                1L,
+                UUID.randomUUID(),
                 "Frank",
                 "Bomkoss",
                 now,
                 now
                 );
         JsonContent<CustomerResponse> content = jacksonTester.write(customerResponse);
-        assertThat(content).hasJsonPathNumberValue("$.id");
+        assertThat(content).hasJsonPathStringValue("$.id");
         assertThat(content).hasJsonPathStringValue("$.firstName");
-        assertThat(content).extractingJsonPathNumberValue("$.id").isEqualTo(1);
+      //  assertThat(content).extractingJsonPathNumberValue("$.id").isEqualTo(1);
         assertThat(content).extractingJsonPathStringValue("$.firstName").isEqualTo("Frank");
         assertThat(content).extractingJsonPathStringValue("$.createdAt").isEqualTo(now.toString());
         assertThat(content).extractingJsonPathStringValue("$.modifiedAt").isEqualTo(now.toString());

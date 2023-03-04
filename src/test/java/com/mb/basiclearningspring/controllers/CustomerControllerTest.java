@@ -12,6 +12,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 import static org.mockito.Mockito.when;
 
@@ -34,8 +35,8 @@ class CustomerControllerTest {
         // Given
         LocalDateTime now = LocalDateTime.now();
         when(customerService.getCustomers()).thenReturn(List.of(
-                new CustomerResponse (1L,"Henry", "Roland", now, now),
-                new CustomerResponse (2L,"Arnold", "Vincent", now.minusDays(2), now.plusHours(3))
+                new CustomerResponse (UUID.randomUUID().toString(),"Henry", "Roland", now, now),
+                new CustomerResponse (UUID.randomUUID().toString(),"Arnold", "Vincent", now.minusDays(2), now.plusHours(3))
         ));
 
         // When

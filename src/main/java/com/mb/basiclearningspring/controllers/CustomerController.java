@@ -1,5 +1,6 @@
 package com.mb.basiclearningspring.controllers;
 
+import com.mb.basiclearningspring.dto.AttachAccountRequest;
 import com.mb.basiclearningspring.dto.CustomerRequest;
 import com.mb.basiclearningspring.dto.CustomerResponse;
 import com.mb.basiclearningspring.services.CustomerService;
@@ -8,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(path = "api/v0/customers")
@@ -31,13 +33,19 @@ public class CustomerController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
-    public CustomerResponse getCustomer(@PathVariable("id") Long id)  {
+    public CustomerResponse getCustomer(@PathVariable("id") UUID id)  {
         return customerService.getCustomer(id);
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
-    public CustomerResponse modifyCustomer(@PathVariable("id") Long id, @RequestBody CustomerRequest customer) {
+    public CustomerResponse modifyCustomer(@PathVariable("id") UUID id, @RequestBody CustomerRequest customer) {
         return customerService.modifyCustomer(id,customer);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "attach-account/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void attachAccount(@PathVariable("id") UUID id, @RequestBody AttachAccountRequest attachAccountRequest){
+       customerService.attachAccount(id,attachAccountRequest);
     }
 
 }

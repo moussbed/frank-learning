@@ -2,14 +2,16 @@ package com.mb.basiclearningspring.entities;
 
 import jakarta.persistence.*;
 
+import java.util.UUID;
+
 @MappedSuperclass
 public abstract class ID {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id ;
+    private UUID id = UUID.randomUUID();
 
-    public long getId() {
+    public UUID getId() {
         return id;
     }
+
 }

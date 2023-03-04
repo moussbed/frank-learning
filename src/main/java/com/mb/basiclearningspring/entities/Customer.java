@@ -6,17 +6,14 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-
 @Entity
-public class Customer implements BasicEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Long id;
+public class Customer extends ID implements BasicEntity {
 
     private String firstName;
     private String lastName;
 
+    @OneToOne
+    private Account account;
     @CreationTimestamp
     @JsonProperty("created_at")
     private LocalDateTime createdDate;
@@ -28,13 +25,6 @@ public class Customer implements BasicEntity {
 
     private String email;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Customer() {
     }
@@ -64,6 +54,14 @@ public class Customer implements BasicEntity {
 
     public String getEmail() {
         return email;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
     public void setEmail(String email) {

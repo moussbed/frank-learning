@@ -23,7 +23,7 @@ public class CustomerServiceTest {
     public void shouldGetCustomers(){
          // Given
         when(customerRepository.findAll()).thenReturn(List.of(new Customer("Bedril","Kgrav")));
-        CustomerService customerService = new CustomerServiceImpl(customerRepository);
+        CustomerService customerService = new CustomerServiceImpl(customerRepository, accountRepository);
         // When
         List<CustomerResponse> customers = customerService.getCustomers();
         // Then
@@ -37,7 +37,7 @@ public class CustomerServiceTest {
         String lastName = "Bedril";
         CustomerRequest customerRequest = new CustomerRequest(firstName, lastName);
         when(customerRepository.save(any())).thenReturn(null);
-        CustomerService customerService = new CustomerServiceImpl(customerRepository);
+        CustomerService customerService = new CustomerServiceImpl(customerRepository, accountRepository);
         // When
         customerService.addCustomer(customerRequest);
         ArgumentCaptor<Customer> customerArgumentCaptor = ArgumentCaptor.forClass(Customer.class);

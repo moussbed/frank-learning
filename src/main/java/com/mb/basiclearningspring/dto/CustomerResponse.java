@@ -1,11 +1,13 @@
 package com.mb.basiclearningspring.dto;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
-public record CustomerResponse(long id,
+public record CustomerResponse(UUID id,
                                String firstName,
                                String lastName,
                                LocalDateTime createdAt,
-                               LocalDateTime modifiedAt
+                               LocalDateTime modifiedAt,
+                               UUID accountId
                                ) {
 }
